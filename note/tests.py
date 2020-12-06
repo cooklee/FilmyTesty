@@ -24,3 +24,10 @@ def test_osoby_list(client, wydawcy):
     assert wydawcy.count() == result.context['object_list'].count()
     for item in result.context['object_list']:
         assert item in wydawcy
+
+@pytest.mark.django_db
+def test_dodaj_osoby(client):
+    osoba = {'imie':'ala', 'nazwisko':'makota'}
+    result = client.post(reverse("dodaj_osoby"), osoba)
+    assert result.status_code == 302
+    Osoba.objects.get(imie=osoba['imie'], nazwisko=osoba['nazwisko'])
