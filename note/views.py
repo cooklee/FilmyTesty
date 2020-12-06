@@ -1,3 +1,4 @@
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views.generic import ListView, CreateView, DetailView
@@ -34,6 +35,6 @@ class DodajWydawcaView(CreateView):
     success_url = reverse_lazy('wydawcy_list')
 
 
-class OsobaView(DetailView):
+class OsobaView(LoginRequiredMixin, DetailView):
     model = Osoba
     template_name = 'detail.html'

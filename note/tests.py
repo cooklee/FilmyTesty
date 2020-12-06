@@ -3,10 +3,10 @@ from note.models import Osoba
 import pytest
 
 
-
 def test_czy_to_dziala(client):
     result = client.get("/")
     assert result.status_code == 200
+
 
 @pytest.mark.django_db
 def test_osoby_list(client, osoby):
@@ -25,9 +25,10 @@ def test_osoby_list(client, wydawcy):
     for item in result.context['object_list']:
         assert item in wydawcy
 
+
 @pytest.mark.django_db
 def test_dodaj_osoby(client):
-    osoba = {'imie':'ala', 'nazwisko':'makota'}
+    osoba = {'imie': 'ala', 'nazwisko': 'makota'}
     result = client.post(reverse("dodaj_osoby"), osoba)
     assert result.status_code == 302
     Osoba.objects.get(imie=osoba['imie'], nazwisko=osoba['nazwisko'])
@@ -35,7 +36,17 @@ def test_dodaj_osoby(client):
 
 @pytest.mark.django_db
 def test_dodaj_wydawce(client):
-    wydawca = {'nazwa':'ala'}
+    wydawca = {'nazwa': 'ala'}
     result = client.post(reverse("dodaj_wydawcy"), wydawca)
     assert result.status_code == 302
     Osoba.objects.get(nazwa=wydawca['nazwa'])
+
+
+@pytest.mark.parametrize("index",list(range(10)))
+@pytest.mark.django_db
+def test_szczegoly_osoby( index, client, osoby, user):
+    client.force_login(user)
+    result = client.get(reverse("osoba", args=(osoby[index].id,)))
+    assert result.status_code == 200
+    assert result.context['object'].imie == osoby[index].imie
+    assert result.context['object'].nazwisko == osoby[index].nazwisko
