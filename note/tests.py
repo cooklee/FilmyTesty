@@ -31,3 +31,11 @@ def test_dodaj_osoby(client):
     result = client.post(reverse("dodaj_osoby"), osoba)
     assert result.status_code == 302
     Osoba.objects.get(imie=osoba['imie'], nazwisko=osoba['nazwisko'])
+
+
+@pytest.mark.django_db
+def test_dodaj_wydawce(client):
+    wydawca = {'nazwa':'ala'}
+    result = client.post(reverse("dodaj_wydawcy"), wydawca)
+    assert result.status_code == 302
+    Osoba.objects.get(nazwa=wydawca['nazwa'])

@@ -26,6 +26,14 @@ class DodajOsobeView(CreateView):
     success_url = reverse_lazy('osoby_list')
 
 
+
+class DodajWydawcaView(CreateView):
+    model = Wydawca
+    fields = '__all__'
+    template_name = 'form.html'
+    success_url = reverse_lazy('wydawcy_list')
+
+
 class OsobaView(DetailView):
     model = Osoba
     template_name = 'detail.html'
