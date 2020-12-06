@@ -1,0 +1,20 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'base.css' %}" >
+</head>
+<body>
+<ul class="header">
+  <li class="header"><a href="{% url 'osoby_list' %}">Osoby</a></li>
+  <li class="header"><a href="news.asp">News</a></li>
+  <li class="header"><a href="contact.asp">Contact</a></li>
+  <li class="header"><a href="about.asp">About</a></li>
+</ul>
+{% block  content%}
+
+{% endblock %}
+</body>
+</html>
