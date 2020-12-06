@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views.generic import ListView, CreateView, DetailView
 
-from note.models import Osoba
+from note.models import Osoba, Wydawca
 
 
 def index(request):
@@ -12,6 +12,10 @@ def index(request):
 
 class OsobaListView(ListView):
     model = Osoba
+    template_name = 'list_view.html'
+
+class WydawcaListView(ListView):
+    model = Wydawca
     template_name = 'list_view.html'
 
 

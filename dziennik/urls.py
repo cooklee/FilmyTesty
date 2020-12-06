@@ -20,6 +20,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.index),
     path('osoby/', views.OsobaListView.as_view(), name='osoby_list'),
+    path('wydawcy/', views.WydawcaListView.as_view(), name='wydawcy_list'),
     path('dodaj_osoby/', views.DodajOsobeView.as_view(), name='dodaj_osoby'),
     path('osoba/<int:pk>', views.OsobaView.as_view(), name='osoba'),
 ]

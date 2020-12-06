@@ -15,3 +15,12 @@ def test_osoby_list(client, osoby):
     assert osoby.count() == result.context['object_list'].count()
     for item in result.context['object_list']:
         assert item in osoby
+
+
+@pytest.mark.django_db
+def test_osoby_list(client, wydawcy):
+    result = client.get(reverse("wydawcy_list"))
+    assert result.status_code == 200
+    assert wydawcy.count() == result.context['object_list'].count()
+    for item in result.context['object_list']:
+        assert item in wydawcy
