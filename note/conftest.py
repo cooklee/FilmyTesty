@@ -1,5 +1,5 @@
 import pytest
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User, Permission
 from django.test import Client
 from note.models import Osoba, Wydawca
 
@@ -25,8 +25,10 @@ def wydawcy():
 
 @pytest.fixture
 def user():
+    permission = Permission.objects.get(codename='view_osoba')
     u = User.objects.create(username='cooklee')
     u.set_password("ala")
     u.save()
+    u.user_permissions.add(permission)
     return u
 
